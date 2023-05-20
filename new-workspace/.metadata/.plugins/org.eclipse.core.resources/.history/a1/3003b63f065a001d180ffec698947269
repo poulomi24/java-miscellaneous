@@ -1,0 +1,14 @@
+import java.lang.*;
+import org.apache.commons.lang3;
+public class SubstringCount {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s1 = "abcdehabcakjsabcdpieabc";
+		String s2 = "abc";
+		int x = StringUtils.
+		
+
+	}
+
+}
