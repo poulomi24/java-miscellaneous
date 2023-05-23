@@ -8,7 +8,7 @@ public class SingletonApp implements Serializable,Cloneable{
     private SingletonApp() {
     }
 
-    private static SingletonApp singletonApp;
+    private volatile static SingletonApp singletonApp;
 
     private static SingletonApp getInstance() {
         if (singletonApp == null) {

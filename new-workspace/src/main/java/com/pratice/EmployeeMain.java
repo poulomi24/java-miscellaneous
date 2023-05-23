@@ -1,6 +1,7 @@
 package com.pratice;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,10 +62,11 @@ public class EmployeeMain {
         empSalList.add(sal4);
         empSalList.add(sal5);
 
-        List<EmployeeCity> empSortedList = empSalList.stream().sorted((o1,o2) -> (int) (o2.getSalary())-o2.getSalary()).skip(3).collect(Collectors.toList());
+        List<EmployeeCity> empSortedList = empSalList.stream().sorted((o1,o2) -> (int) (o2.getSalary())-o1.getSalary()).skip(3).collect(Collectors.toList());
         System.out.println("sorted list:: ");
         System.out.println(empSortedList);
 
-
+        EmployeeCity employeeCity = empSalList.stream().collect(Collectors.maxBy(Comparator.comparing(x -> x.getSalary()))).get();
+        System.out.println("emp:: " +employeeCity);
     }
 }

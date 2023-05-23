@@ -1,7 +1,9 @@
 package com.pratice;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ComparableDemo {
@@ -39,5 +41,12 @@ public class ComparableDemo {
         {
             System.out.println(entry.getKey()+" : "+entry.getValue());
         }
+        Comparator<Employee1> employee1Comparator = Comparator.comparing(x -> x.getAge());
+        list.stream().collect(Collectors.groupingBy(x ->x.getAge(),Collectors.reducing(BinaryOperator.maxBy(employee1Comparator))));
+
+        System.out.println("$$$$$$$$");
+        IntStream.rangeClosed(1,10).forEach(x -> System.out.println(Thread.currentThread().getName()+ " : "+x));
+        System.out.println("===========");
+        IntStream.rangeClosed(1,10).parallel().forEach(x-> System.out.println(Thread.currentThread().getName()+ " : "+x));
     }
 }

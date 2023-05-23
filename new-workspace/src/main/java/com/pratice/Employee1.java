@@ -54,7 +54,7 @@ public class Employee1 implements Comparable{
         else if(!name.equals(employee1.name))
             return false;
         return true;
-     //   return age == employee1.age && name.equals(employee1.name);
+     //  return age == employee1.age && name.equals(employee1.name);
     }
 
     @Override

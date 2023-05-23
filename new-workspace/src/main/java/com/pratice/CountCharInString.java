@@ -1,6 +1,8 @@
 package com.pratice;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CountCharInString {
     static String input = "subscribeToInterviewMania";
@@ -26,5 +28,9 @@ public class CountCharInString {
         List<char[]> stringList = Arrays.asList(input.toCharArray());
         Set<char[]> mySet = new HashSet<>();
         stringList.stream().filter(x -> !mySet.add(x)).forEach(System.out::println);
+
+        System.out.println("**********");
+        Map<String, Long> countMap = Arrays.stream(input.split("")).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+        System.out.println(countMap);
     }
 }
