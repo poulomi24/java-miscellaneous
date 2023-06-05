@@ -66,7 +66,14 @@ public class EmployeeMain {
         System.out.println("sorted list:: ");
         System.out.println(empSortedList);
 
-        EmployeeCity employeeCity = empSalList.stream().collect(Collectors.maxBy(Comparator.comparing(x -> x.getSalary()))).get();
-        System.out.println("emp:: " +employeeCity);
+        int max = empSalList.stream().collect(Collectors.maxBy(Comparator.comparing(x -> x.getSalary()))).get().getSalary();
+        System.out.println("max sal:: "+max);
+
+        double max2 =  empSalList.stream().map(x -> x.getSalary()).mapToDouble(Integer::doubleValue).summaryStatistics().getAverage();
+        System.out.println("max 2:: " +max2);
+
+      List<EmployeeCity> employeeCityList1 =  empSalList.stream().sorted((x1,x2) -> x1.getSalary()-x2.getSalary()).collect(Collectors.toList());
+        System.out.println("empCityList1:: " +employeeCityList1);
+
     }
 }

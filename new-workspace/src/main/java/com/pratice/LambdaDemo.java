@@ -12,8 +12,8 @@ public class LambdaDemo{
 	public static void main(String[] args) {
 //		System.out.println(add(3,5));
 		
-//		BiConsumer<Integer,Integer> biConsumer = (Integer a,Integer b) -> System.out.println(a+b);
-//		biConsumer.accept(10, 5);
+		BiConsumer<Integer,Double> biConsumer = (Integer a,Double b) -> System.out.println(a+b);
+		biConsumer.accept(10, 5.0);
 
 		Stream.generate(() -> new Random().nextInt(100))
 				.limit(10)
