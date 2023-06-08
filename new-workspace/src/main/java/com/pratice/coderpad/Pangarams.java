@@ -17,16 +17,39 @@ public class Pangarams {
         //your code goes here
         public String findMissingLetters(String sentence) {
             String ALPHABETS = "abcdefghijklmnopqrstuvwxyz";
+            if(sentence.isEmpty())
+                return ALPHABETS;
+//            String ALPHABETS = "abcdefghijklmnopqrstuvwxyz";
+//            sentence = sentence.toLowerCase();
+//            for (int i = 0; i < sentence.length(); i++) {
+//                int index = ALPHABETS.indexOf(sentence.charAt(i));
+//                if (index != -1) {
+//                    ALPHABETS = ALPHABETS.substring(0, index) + ALPHABETS.substring(index + 1);
+//                }
+//                System.out.println(ALPHABETS);
+//            }
+//            System.out.println("SS:: " +ALPHABETS);
+//            return ALPHABETS;
+            boolean[] letters = new boolean[26];
             sentence = sentence.toLowerCase();
+
             for (int i = 0; i < sentence.length(); i++) {
-                int index = ALPHABETS.indexOf(sentence.charAt(i));
-                if (index != -1) {
-                    ALPHABETS = ALPHABETS.substring(0, index) + ALPHABETS.substring(index + 1);
+                char ch = sentence.charAt(i);
+                if (Character.isLetter(ch)) {
+                    int index = ch - 'a';
+                    letters[index] = true;
                 }
-                System.out.println(ALPHABETS);
             }
-            System.out.println("SS:: " +ALPHABETS);
-            return ALPHABETS;
+
+            StringBuilder missingLetters = new StringBuilder();
+            for (int i = 0; i < letters.length; i++) {
+                if (!letters[i]) {
+                    char missingLetter = (char) ('a' + i);
+                    missingLetters.append(missingLetter);
+                }
+            }
+
+            return missingLetters.toString();
         }
 
         public static void main(String[] args) {

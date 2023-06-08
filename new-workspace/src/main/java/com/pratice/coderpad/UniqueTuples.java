@@ -6,30 +6,16 @@ import java.util.Set;
 public class UniqueTuples {
     public static HashSet<String> uniqueTuples(String input, int len) {
         HashSet<String> uniqueTuples = new HashSet<>();
-        StringBuilder currentTuple = new StringBuilder();
-        Set<String> visited = new HashSet<>();
 
-        generateUniqueTuples(input, len, 0, currentTuple, uniqueTuples, visited);
+        for (int i = 0; i <= input.length() - len; i++) {
+            StringBuilder tupleBuilder = new StringBuilder();
+            for (int j = i; j < i + len; j++) {
+                tupleBuilder.append(input.charAt(j));
+            }
+            uniqueTuples.add(tupleBuilder.toString());
+        }
 
         return uniqueTuples;
-    }
-
-    private static void generateUniqueTuples(String input, int tupleSize, int startIndex, StringBuilder currentTuple,
-                                             Set<String> uniqueTuples, Set<String> visited) {
-        if (currentTuple.length() == tupleSize) {
-            String tuple = currentTuple.toString();
-            if (!visited.contains(tuple)) {
-                uniqueTuples.add(tuple);
-                visited.add(tuple);
-            }
-            return;
-        }
-
-        for (int i = startIndex; i < input.length(); i++) {
-            currentTuple.append(input.charAt(i));
-            generateUniqueTuples(input, tupleSize, i + 1, currentTuple, uniqueTuples, visited);
-            currentTuple.deleteCharAt(currentTuple.length() - 1);
-        }
     }
 
     public static void main(String[] args) {

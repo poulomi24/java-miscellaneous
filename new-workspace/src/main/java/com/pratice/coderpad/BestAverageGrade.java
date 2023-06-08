@@ -9,24 +9,14 @@ import java.util.stream.Stream;
 
 public class BestAverageGrade {
 
-    public static Double bestAvgGrade(String[][] scores)
-    {Map<String, List<Integer>> avgScoreListMap = new HashMap<String, List<Integer>>();
-
-        Arrays.stream(scores).forEach(s -> {
-            List<Integer> scoreList = avgScoreListMap.get(s[0]);
-            if (scoreList == null) {
-                scoreList = new ArrayList<Integer>();
-            }
-            scoreList.add(Integer.valueOf(s[1]));
-            avgScoreListMap.put(s[0], scoreList);
-        });
-
-        //Converting a map of list a map of double
-        Map<String, Double> avgScoreMap = avgScoreListMap.entrySet().stream().collect(Collectors.toMap(
-                e -> e.getKey(),
-                e -> e.getValue().stream().mapToInt(v -> v).average().getAsDouble()
-        ));
-        return avgScoreMap.values().stream().mapToDouble(v -> v).max().getAsDouble();
+    public static Double bestAvgGrade(String[][] scores){
+        return Arrays.stream(scores)
+                .collect(Collectors.groupingBy(s -> s[0], Collectors.averagingDouble(s -> Double.valueOf(s[1]))))
+                .values()
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .max()
+                .getAsDouble();
     }
 
     public static boolean pass()

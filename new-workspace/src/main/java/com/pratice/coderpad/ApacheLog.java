@@ -35,15 +35,14 @@ public class ApacheLog {
 //        // Your code goes here
 //        return ipMax;
 
-        Map<String, Long> ipCountMap = Arrays.stream(lines)
+        String topIpAddress = Arrays.stream(lines)
                 .map(line -> line.split(" - ")[0])
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        String topIpAddress = ipCountMap.entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream().max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
+
         return topIpAddress;
     }
 

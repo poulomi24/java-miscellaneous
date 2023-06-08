@@ -1,6 +1,7 @@
 package com.pratice.coderpad;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GroupAnagram {
     static String input = "cat dog tac sat tas god dog";
@@ -26,6 +27,7 @@ public class GroupAnagram {
         System.out.println(resultList);
         Collections.sort(resultList, new ListComparator<>());
         System.out.println(resultList);
+        System.out.println(resultList.stream().flatMap(List::stream).collect(Collectors.joining(" ")));
     }
 
 

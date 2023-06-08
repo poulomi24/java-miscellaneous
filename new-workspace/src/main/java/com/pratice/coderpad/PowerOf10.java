@@ -10,19 +10,19 @@ public class PowerOf10 {
      */
     public static boolean isPowerOf10(int x)
     {
-//        if(x<=0)
-//            return false;
-//        while(x>1)
-//        {
-//            if(x%10!=0){
-//                return false;
-//            }
-//            x=x/10;
-//        }
-//
-//        return true;
+        if(x<=0)
+            return false;
+        while(x>1)
+        {
+            if(x%10!=0){
+                return false;
+            }
+            x=x/10;
+        }
 
-        return x > 0 && IntStream.iterate(1, i -> i <= x, i -> i * 10).anyMatch(i -> i == x);
+        return true;
+
+  //      return x > 0 && IntStream.iterate(1, i -> i <= x, i -> i * 10).anyMatch(i -> i == x);
     }
 
     public static boolean doTestsPass()

@@ -1,9 +1,5 @@
 package com.pratice.coderpad;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class DistanceBetweenTwoWords {
 
 
@@ -12,40 +8,39 @@ public class DistanceBetweenTwoWords {
     // Words can appear multiple times in any order and should be case insensitive.
 
     // E.g. for the document="Example we just made up"
-    //   shortestDistance( document, "we", "just" ) == 4
+    //   shortestDistance( document, "we", "just" ) ==   4
 
     public static double shortestDistance(String document, String word1, String word2) {
-        word1 = word1.toLowerCase();
-        word2 = word2.toLowerCase();
-        document= document.toLowerCase();
+            final String[] words = document.split("[,. ]");
 
-        int shortestDist = Integer.MAX_VALUE;
-        String[] words = document.split("\\s+");
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals(word1)) {
-                for (int j = 0; j < words.length; j++) {
-                    if (words[j].equals(word2)) {
-                        int start = Math.min(i, j);
-                        int end = Math.max(i, j);
-                        int dist = end - start; // no of spaces
-                        dist += (word1.length() + word2.length())/ 2;
-                        for (int k = start + 1; k < end; k++) {
-                            dist += words[k].length();
-                        }
-                        shortestDist = Math.min(shortestDist, dist);
-                    }
+            int wordCount = 0;
+            double wordOneCount = 0;
+            double wordTwoCount = 0;
+            double shortestDistance = Double.MAX_VALUE;
+            for (String word : words) {
+                if (word.equalsIgnoreCase(word1))
+                    wordOneCount = wordCount + (word.length() / 2d);
+                else if (word.equalsIgnoreCase(word2))
+                    wordTwoCount = wordCount + (word.length() / 2d);
+
+                if (wordOneCount > 0 && wordTwoCount > 0) {
+                    shortestDistance = Math.min(shortestDistance, Math.abs(wordTwoCount - wordOneCount));
                 }
+
+                wordCount += word.length() + 1;
             }
-        }
-        System.out.println("word1 = "+word1+", word2 = "+word2+", shortestDist = "+shortestDist);
-        return shortestDist;
+
+            System.out.println(String.format("Word1 : %s, word2: %s, distance: %s", word1, word2, shortestDistance));
+
+            return shortestDistance;
     }
+
 
     public static boolean pass() {
-        return  shortestDistance(document, "and", "graphic") == 6d &&
-                shortestDistance(document, "transfer", "it") == 14d &&
-                shortestDistance(document, "Design", "filler" ) == 25d ;
-    }
+            return  shortestDistance(document, "and", "graphic") == 6d &&
+                    shortestDistance(document, "transfer", "it") == 14d &&
+                    shortestDistance(document, "Design", "filler" ) == 25d ;
+        }
 
     public static void main(String[] args) {
         if (pass()) {

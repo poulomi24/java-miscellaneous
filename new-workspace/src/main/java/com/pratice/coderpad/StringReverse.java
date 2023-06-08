@@ -8,9 +8,6 @@ public class StringReverse {
      * Example: reverseStr(str) where str is "abcd" returns "dcba".
      */
     public static String reverseStr( String str ){
-        //your code goes here
-        //ther will be some soultion with defect that would need to be identified
-      //  return "Hello World";
        String revString = str.chars()
                .mapToObj(c -> String.valueOf((char) c))
                .reduce("", (s1, s2) -> s2 + s1);
